@@ -1,0 +1,8 @@
+
+git clone https://github.com/Noosarpparashar/FrenchEnglishTranslator.git
+do cd
+git fetch && git checkout TanzuBranch
+Put there manually
+git add .
+git commit -m "dsfsdf"
+git push
