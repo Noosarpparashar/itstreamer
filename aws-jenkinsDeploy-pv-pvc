@@ -155,9 +155,6 @@ spec:
   resources:
     requests:
       storage: 80Gi
-      selector:
-        matchLabels:
-          type: "amazonEBS"
       
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -175,7 +172,37 @@ spec:
   awsElasticBlockStore:
     volumeID: vol-03fefce2345977d86
     fsType: ext4
-
+    
+    
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ingressFiles
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  #namespace: game-2048
+  name: ingress-jenkins
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+spec:
+  rules:
+    - host: noosarp.cloudplatform.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: jenkins
+              servicePort: 80
+--------------------------------------------------------------------------------------------------------------------------------------------------
+create_service_account:
+	eksctl create iamserviceaccount \
+      --cluster=prasoon-eks-cluster \
+      --namespace=kube-system \
+      --name=aws-load-balancer-controller \
+      --attach-policy-arn=arn:aws:iam::113099871417:policy/AWSLoadBalancerControllerIAMPolicy \
+      --override-existing-serviceaccounts \
+      --approve
 
 
 
