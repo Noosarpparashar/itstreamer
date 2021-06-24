@@ -1,2 +1,10 @@
+---------------------------------AWS permissions-------------------------------------------------------------------------
 IAM role for session manager connect AmazonEC2RoleforSSM
 Attach the above role to ec2
+-----------
+The ps aux command is a tool to monitor processes running on your Linux system
+-----------------------
+attach all ecr roles to that ec2 to do ecr login
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 113099871417.dkr.ecr.us-east-2.amazonaws.com
+
+
